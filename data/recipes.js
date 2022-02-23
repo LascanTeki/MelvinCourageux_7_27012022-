@@ -1,4 +1,4 @@
-function Getrecipes(){
+async function Getrecipes(){
 
 const recipes = [
     {
@@ -1726,6 +1726,8 @@ const recipes = [
         "ustensils":["rouleau à patisserie","fouet"]
     }
 ]
+console.log(recipes.id);
+console.log(recipes.ingredients);
 
 return recipes
 }

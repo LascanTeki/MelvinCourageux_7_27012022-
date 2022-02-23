@@ -182,9 +182,10 @@ li {
     width: 33%;
     writing-mode: horizontal-tb;
     font-size: 18px;
-    padding: 0.25rem 2.5rem;
+    padding: 0.25rem 3.5rem;
     white-space: nowrap;
     font-weight: lighter;
+    width: fit-content;
 }
 
 .dropdown-parent #form, .open #menu1, .open #menu2, .open #menu3 {
@@ -208,4 +209,15 @@ li {
 
 #form span {
     font-size: 18px;
+}
+
+a{
+    color: white;
+}
+
+a:hover{
+    cursor: pointer;
+    color: white;
+    text-decoration: none;
+    background-color: rgba(255, 255, 255, 0.2);
 }
