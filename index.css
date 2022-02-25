@@ -81,6 +81,7 @@ main {
 
 .time {
     font-weight: bold;
+    white-space: nowrap;
 }
 
 .card img {
@@ -122,6 +123,11 @@ li {
     list-style-type: none;
     white-space: nowrap;
     overflow: visible;
+    
+}
+
+#filters li{
+    padding: 0.25rem 3.5rem;
 }
 
 #filters {
@@ -149,17 +155,17 @@ li {
     justify-content: space-around;
 }
 
-#menu1, .open .blue, #filters .blue {
+#menu1, .open .blue, #filters .blue, #tags .b {
     background-color: #3282F7;
     border: #3282F7;
 }
 
-#menu2, .open .green, #filters .green {
+#menu2, .open .green, #filters .green, #tags .g {
     background-color: #68D9A4;
     border: #68D9A4;
 }
 
-#menu3, .open .red, #filters .red {
+#menu3, .open .red, #filters .red, #tags .r {
     background-color: #ED6454;
     border: #ED6454;
 }
@@ -182,10 +188,8 @@ li {
     width: 33%;
     writing-mode: horizontal-tb;
     font-size: 18px;
-    padding: 0.25rem 3.5rem;
     white-space: nowrap;
     font-weight: lighter;
-    width: fit-content;
 }
 
 .dropdown-parent #form, .open #menu1, .open #menu2, .open #menu3 {
@@ -202,7 +206,7 @@ li {
 }
 
 .open #form form input::placeholder {
-    color:white;
+    color: white;
     opacity: 50%;
     font-weight: 400;
 }
@@ -211,13 +215,52 @@ li {
     font-size: 18px;
 }
 
-a{
+a {
     color: white;
 }
 
-a:hover{
+a:hover {
     cursor: pointer;
     color: white;
     text-decoration: none;
     background-color: rgba(255, 255, 255, 0.2);
+}
+
+#tags {
+    font-family: 'Lato', sans-serif;
+    display: flex;
+    width: 95%;
+    padding-bottom: 20px;
+    justify-content: flex-start;
+}
+
+#tags .tags {
+    width: 107px;
+    Height: 37px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    border-radius: 5px;
+    margin-right: 28px;
+    display: flex;
+    align-items: center;
+}
+
+#tags .x {
+    font-size: 12px;
+    bottom: 1px;
+    left: 4px;
+}
+
+#tags .fa-stack{
+    width: fit-content;
+    margin-right: 13px;
+}
+
+#tags .txt{
+    width: 65%;
+    height: fit-content;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
