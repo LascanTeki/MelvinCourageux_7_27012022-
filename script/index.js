@@ -107,12 +107,12 @@ class Filter {
     static filter(filter, recipes) {
         console.log("still")
         return recipes.filter(function (el) {
-            let f;
-            for (let i = 0; i < el.ingredients.length; i++) {
 
-                f = + el.ingredients[i].ingredient.toLowerCase().indexOf(filter.toLowerCase()) !== -1
-            }
-            console.log(el.name.toLowerCase().indexOf(filter.toLowerCase()) !== -1 || el.description.toLowerCase().indexOf(filter.toLowerCase()) !== -1 || f);
+                let f = el.ingredients.find(col => {
+                    return filter.toLowerCase().includes(col.ingredient.toLowerCase());
+                  });
+
+            
             return el.name.toLowerCase().indexOf(filter.toLowerCase()) !== -1 || el.description.toLowerCase().indexOf(filter.toLowerCase()) !== -1 || f
         });
     }
@@ -127,21 +127,19 @@ class Filter {
         }
         if (e.className === "b" || e.className === "tags b") {
             let f;
-            list = list.filter(function (el) {
-                for (let i = 0; i < el.ingredients.length; i++) {
-                    f = + el.ingredients[i].ingredient.toLowerCase().indexOf(e.textContent.toLowerCase()) !== -1;
-                }
-                return f
-            });
+            list = list.filter(x => x.ingredients.find(col => {
+                
+                return e.textContent.toLowerCase() === col.ingredient.toLowerCase();
+              }))
         }
         if (e.className === "r" || e.className === "tags r") {
             let f;
-            list = list.filter(function (el) {
-                for (let i = 0; i < el.ustensils.length; i++) {
-                    f = + el.ustensils[i].toLowerCase().indexOf(e.textContent.toLowerCase()) !== -1;
-                }
-                return f
-            });
+
+            list = list.filter(x => x.ustensils.find(col => {
+                return e.textContent.toLowerCase() === col.toLowerCase();
+              }))
+
+ 
         }
         console.log(list);
         return list;
@@ -162,12 +160,12 @@ function display(recipes) {
     for (let i = 0; i < filtering.length; i++) {
         
         let filt = filtering[i].cloneNode(true);
-        filt.textContent = filt.textContent.replace('x', '')
+        
         filt.innerHTML = filt.innerHTML.replace('<span class="txt">', '')
         filt.innerHTML = filt.innerHTML.replace('<span class="fa-stack fa-1x">', '')
-        filt.innerHTML = filt.innerHTML.replace('<i class="far fa-circle fa-stack-1x" aria-hidden="true">', '')
         filt.innerHTML = filt.innerHTML.replace('</i><span class="x fa-stack-1x">', '')
-        filt.innerHTML = filt.innerHTML.replace('x</span></span>', '')
+        filt.innerHTML = filt.innerHTML.replace('x</i>', '')
+        filt.innerHTML = filt.innerHTML.replace('<i class="far fa-circle fa-stack-1x"></i>', '')
         console.log(filt);
         recipes = Filter.tags(filt, recipes)
     }
@@ -184,7 +182,7 @@ function display(recipes) {
     displayRecipes(recipes);
 }
 
-const tagging = async function (e) {
+const tagging = function (e) {
     tags = document.getElementById("tags");
     const tag = document.createElement('a');
     tag.innerHTML = `<span class = "txt">${e.target.textContent}</span><span class="fa-stack fa-1x"><i class="far fa-circle fa-stack-1x"></i><span class="x fa-stack-1x">x</span></span>`;
@@ -202,12 +200,42 @@ const tagging = async function (e) {
 async function init() {
     await displayRecipes(recipes);
     input = document.getElementById("myInput");
+    search =  document.getElementsByClassName("barre");
     filter = document.getElementsByClassName("dropdown-item");
 
     input.addEventListener('keyup', () => {
         display(recipes);
     });
 
+    for (let t = 0; t < 3; t++) {
+        search[t].addEventListener('click', function (e) {
+            e.stopPropagation();
+        });
+        search[t].addEventListener('keyup', function (e) {
+            if (e.target.id==="barrer") {
+                li = document.getElementsByClassName("r");
+            }
+            if (e.target.id==="barreb") {
+                li = document.getElementsByClassName("b");
+            }
+            if (e.target.id==="barreg") {
+                li = document.getElementsByClassName("g");
+            }
+            for (let i = 0; i < li.length; i++) {
+                
+                if (li[i].textContent.toLowerCase().includes(e.target.value.toLowerCase())) {
+                    li[i].style.display="list-item"
+                }
+                else {
+                    li[i].style.display="none"
+                }
+            }
+            console.log(e.target.value);
+            
+        });
+    }
+
+    
 }
 
 init();
