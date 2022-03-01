@@ -106,15 +106,24 @@ class Filter {
 
     static filter(filter, recipes) {
         console.log("still")
-        return recipes.filter(function (el) {
+        let final = [];
+        recipes.forEach(recipe => {
+            let { ingredients, name, description } = recipe;
+            if (name.toLowerCase().includes(filter.toLowerCase())) {
+                final.push(recipe);
+            }
+            else if (description.toLowerCase().includes(filter.toLowerCase())) {
+                final.push(recipe);
+            }
 
-                let f = el.ingredients.find(col => {
-                    return filter.toLowerCase().includes(col.ingredient.toLowerCase());
-                  });
-
-            
-            return el.name.toLowerCase().indexOf(filter.toLowerCase()) !== -1 || el.description.toLowerCase().indexOf(filter.toLowerCase()) !== -1 || f
+            else
+                ingredients.forEach(i => {
+                    if (i.ingredient.toLowerCase().includes(filter.toLowerCase())) {
+                        final.push(recipe);
+                    }
+                });
         });
+        return final;
     }
 
     static tags(e, list) {
@@ -128,18 +137,18 @@ class Filter {
         if (e.className === "b" || e.className === "tags b") {
             let f;
             list = list.filter(x => x.ingredients.find(col => {
-                
+
                 return e.textContent.toLowerCase() === col.ingredient.toLowerCase();
-              }))
+            }))
         }
         if (e.className === "r" || e.className === "tags r") {
             let f;
 
             list = list.filter(x => x.ustensils.find(col => {
                 return e.textContent.toLowerCase() === col.toLowerCase();
-              }))
+            }))
 
- 
+
         }
         console.log(list);
         return list;
@@ -158,9 +167,9 @@ function display(recipes) {
     f2[1].innerHTML = "";
     f3[1].innerHTML = "";
     for (let i = 0; i < filtering.length; i++) {
-        
+
         let filt = filtering[i].cloneNode(true);
-        
+
         filt.innerHTML = filt.innerHTML.replace('<span class="txt">', '')
         filt.innerHTML = filt.innerHTML.replace('<span class="fa-stack fa-1x">', '')
         filt.innerHTML = filt.innerHTML.replace('</i><span class="x fa-stack-1x">', '')
@@ -173,7 +182,7 @@ function display(recipes) {
     filter = input.value.toUpperCase();
     if (filter.length >= 3) {
         recipes = Filter.filter(filter, recipes);
-
+        console.log(recipes);
     }
     recipes.sort(function (a, b) {
         let idA = new Date(a.id), idB = new Date(b.id)
@@ -200,7 +209,7 @@ const tagging = function (e) {
 async function init() {
     await displayRecipes(recipes);
     input = document.getElementById("myInput");
-    search =  document.getElementsByClassName("barre");
+    search = document.getElementsByClassName("barre");
     filter = document.getElementsByClassName("dropdown-item");
 
     input.addEventListener('keyup', () => {
@@ -212,30 +221,30 @@ async function init() {
             e.stopPropagation();
         });
         search[t].addEventListener('keyup', function (e) {
-            if (e.target.id==="barrer") {
+            if (e.target.id === "barrer") {
                 li = document.getElementsByClassName("r");
             }
-            if (e.target.id==="barreb") {
+            if (e.target.id === "barreb") {
                 li = document.getElementsByClassName("b");
             }
-            if (e.target.id==="barreg") {
+            if (e.target.id === "barreg") {
                 li = document.getElementsByClassName("g");
             }
             for (let i = 0; i < li.length; i++) {
-                
+
                 if (li[i].textContent.toLowerCase().includes(e.target.value.toLowerCase())) {
-                    li[i].style.display="list-item"
+                    li[i].style.display = "list-item"
                 }
                 else {
-                    li[i].style.display="none"
+                    li[i].style.display = "none"
                 }
             }
             console.log(e.target.value);
-            
+
         });
     }
 
-    
+
 }
 
 init();
