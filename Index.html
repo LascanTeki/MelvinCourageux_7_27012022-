@@ -26,7 +26,7 @@
     <div id="tags"></div>
     <div id="filters">
       <div class="dropdown-parent">
-        <div class="btn btn-primary dropdown-toggle blue" id="form">
+        <div class="btn btn-primary dropdown-toggle blue form">
           <form>
             <input id="barreb" class="barre" type="text" name="pseudo" placeholder="Rechercher un ingredient" /><span
               class="fas fa-chevron-up"></span>
@@ -38,39 +38,39 @@
 
         </ul>
       </div>
-      <ul class="dropdown-parent">
-        <button class="btn btn-primary dropdown-toggle green" data-toggle="dropdown" id="form">
+      <div class="dropdown-parent">
+        <div class="btn btn-primary dropdown-toggle green form" data-toggle="dropdown" >
           <form>
             <input type="text" id="barreg" class="barre" name="pseudo" placeholder="Rechercher un Appareil" /><span
               class="fas fa-chevron-up"></span>
           </form>
-        </button>
+        </div>
         <button class="btn btn-primary dropdown-toggle " type="button" id="menu2" data-toggle="dropdown">Appareils<i
             class="fas fa-chevron-down"></i></button>
         <ul class="dropdown-menu green">
 
         </ul>
-      </ul>
-      <ul class="dropdown-parent">
-        <button class="btn btn-primary dropdown-toggle red" data-toggle="dropdown" id="form">
+      </div>
+      <div class="dropdown-parent">
+        <div class="btn btn-primary dropdown-toggle red form" data-toggle="dropdown">
           <form>
             <input type="text" id="barrer" class="barre" name="pseudo" placeholder="Rechercher un ustensil" /><span
               class="fas fa-chevron-up"></span>
           </form>
-        </button>
+        </div>
         <button class="btn btn-primary dropdown-toggle" type="button" id="menu3" data-toggle="dropdown">Ustensils<i
             class="fas fa-chevron-down"></i></button>
         <ul class="dropdown-menu red">
 
         </ul>
-      </ul>
+      </div>
     </div>
     <div id="recipes">
 
     </div>
   </main>
+  <script src="data/recipes.js"></script>
+<script src="script/index.js"></script>
 </body>
 
 </html>
-<script src="data/recipes.js"></script>
-<script src="script/index.js"></script>
