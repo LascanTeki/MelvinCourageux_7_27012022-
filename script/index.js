@@ -1,5 +1,9 @@
+//prendre les recettes
+
 let recipes = Getrecipes();
 
+
+//mettre les recettes en place dans la page
 async function displayRecipes(recipes) {
     const section = document.getElementById("recipes");
     const filter = document.getElementsByClassName("blue");
@@ -89,6 +93,7 @@ function Tag(filter, content, color) {
         return element.charAt(0).toUpperCase() + element.toLowerCase().slice(1);
     });
 
+    //retirer les doublons
     content = [...new Set(content)];
 
     for (i = 0; i < content.length; i++) {
@@ -101,6 +106,9 @@ function Tag(filter, content, color) {
         filter[1].appendChild(a);
     }
 }
+
+
+//filtrage des recettes quand la bar de recherche est utilisée ou quand un filtre est ajouté 
 
 class Filter {
 
@@ -147,6 +155,9 @@ class Filter {
 
 }
 
+
+//mettre les recettes dans la page après filtrage
+
 function display(recipes) {
     ul = document.getElementById("recipes");
     f1 = document.getElementsByClassName("blue");
@@ -160,12 +171,10 @@ function display(recipes) {
     for (let i = 0; i < filtering.length; i++) {
         
         let filt = filtering[i].cloneNode(true);
-        
+         console.log(filt.innerHTML);
         filt.innerHTML = filt.innerHTML.replace('<span class="txt">', '')
-        filt.innerHTML = filt.innerHTML.replace('<span class="fa-stack fa-1x">', '')
-        filt.innerHTML = filt.innerHTML.replace('</i><span class="x fa-stack-1x">', '')
-        filt.innerHTML = filt.innerHTML.replace('x</i>', '')
-        filt.innerHTML = filt.innerHTML.replace('<i class="far fa-circle fa-stack-1x"></i>', '')
+        filt.innerHTML = filt.innerHTML.replace('<span class="fa-stack fa-1x"><i class="far fa-circle fa-stack-1x"></i><span class="x fa-stack-1x">x</span></span>', '')
+        console.log(filt.innerHTML);
         console.log(filt);
         recipes = Filter.tags(filt, recipes)
     }
@@ -182,12 +191,16 @@ function display(recipes) {
     displayRecipes(recipes);
 }
 
+
+//afficher les tags
 const tagging = function (e) {
     tags = document.getElementById("tags");
     const tag = document.createElement('a');
     tag.innerHTML = `<span class = "txt">${e.target.textContent}</span><span class="fa-stack fa-1x"><i class="far fa-circle fa-stack-1x"></i><span class="x fa-stack-1x">x</span></span>`;
     tag.setAttribute("class", `tags ${e.target.className}`);
     tags.appendChild(tag);
+
+    //enlever un tag quand cliqué
 
     tag.addEventListener('click', function (e) {
         tag.remove();
@@ -207,6 +220,7 @@ async function init() {
         display(recipes);
     });
 
+    //barre de recherche pour filtres
     for (let t = 0; t < 3; t++) {
         search[t].addEventListener('click', function (e) {
             e.stopPropagation();
