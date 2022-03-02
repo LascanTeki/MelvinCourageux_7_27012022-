@@ -88,7 +88,11 @@ async function displayRecipes(recipes) {
     }
 }
 
+//faire apparaitre la liste des filtres
+
 function Tag(filter, content, color) {
+
+    //mettre une majuscule seulement sur la première lettre
     content = content.map(element => {
         return element.charAt(0).toUpperCase() + element.toLowerCase().slice(1);
     });
@@ -112,6 +116,7 @@ function Tag(filter, content, color) {
 
 class Filter {
 
+    //bar de recherche
     static filter(filter, recipes) {
         console.log("still")
         return recipes.filter(function (el) {
@@ -125,6 +130,7 @@ class Filter {
         });
     }
 
+    //tags
     static tags(e, list) {
         console.log(e.textContent);
         if (e.className === "g" || e.className === "tags g") {
@@ -164,18 +170,18 @@ function display(recipes) {
     f2 = document.getElementsByClassName("green");
     f3 = document.getElementsByClassName("red");
     filtering = document.getElementsByClassName("tags");
+
+    //vider la liste des recettes et des tags
     ul.innerHTML = "";
     f1[1].innerHTML = "";
     f2[1].innerHTML = "";
     f3[1].innerHTML = "";
+
     for (let i = 0; i < filtering.length; i++) {
-        
         let filt = filtering[i].cloneNode(true);
-         console.log(filt.innerHTML);
+        //isoler le filtre
         filt.innerHTML = filt.innerHTML.replace('<span class="txt">', '')
         filt.innerHTML = filt.innerHTML.replace('<span class="fa-stack fa-1x"><i class="far fa-circle fa-stack-1x"></i><span class="x fa-stack-1x">x</span></span>', '')
-        console.log(filt.innerHTML);
-        console.log(filt);
         recipes = Filter.tags(filt, recipes)
     }
     input = document.getElementById("myInput");
@@ -184,6 +190,8 @@ function display(recipes) {
         recipes = Filter.filter(filter, recipes);
 
     }
+
+    //arranger les recettes dans leur ordre d'origine
     recipes.sort(function (a, b) {
         let idA = new Date(a.id), idB = new Date(b.id)
         return idA - idB
