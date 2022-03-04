@@ -77,14 +77,14 @@ async function displayRecipes(recipes) {
     }
     );
 
-    Tag(filter2, app, "g")
-    Tag(filter3, us, "r")
-    Tag(filter, ingr, "b")
+    Tag(filter2, app, "g");
+    Tag(filter3, us, "r");
+    Tag(filter, ingr, "b");
 
     filters = document.getElementsByClassName("dropdown-item");
 
     for (let i = 0; i < filters.length; i++) {
-        filters[i].addEventListener('click', tagging)
+        filters[i].addEventListener('click', tagging);
     }
 }
 
@@ -118,7 +118,6 @@ function Tag(filter, content, color) {
 class Filter {
 //bar de recherche
     static filter(filter, recipes) {
-        console.log("still")
         let final = [];
         recipes.forEach(recipe => {
             let { ingredients, name, description } = recipe;
@@ -140,9 +139,7 @@ class Filter {
     }
     //tags
     static tags(e, list) {
-        console.log(e.textContent);
         if (e.className === "g" || e.className === "tags g") {
-            console.log("g");
             list = list.filter(function (el) {
                 return el.appliance.toLowerCase().indexOf(e.textContent.toLowerCase()) !== -1;
             });
@@ -163,7 +160,6 @@ class Filter {
 
  
         }
-        console.log(list);
         return list;
     }
 
@@ -188,11 +184,9 @@ function display(recipes) {
     for (let i = 0; i < filtering.length; i++) {
         let filt = filtering[i].cloneNode(true);
         //isoler le filtre
-        console.log(filt.innerHTML);
-        filt.innerHTML = filt.innerHTML.replace('<span class="txt">', '')
-        filt.innerHTML = filt.innerHTML.replace('<span class="fa-stack fa-1x"><i class="far fa-circle fa-stack-1x" aria-hidden="true"></i><span class="x fa-stack-1x">x</span></span>', '')
-        filt.innerHTML = filt.innerHTML.replace('<span class="fa-stack fa-1x"><i class="far fa-circle fa-stack-1x"></i><span class="x fa-stack-1x">x</span></span>', '')
-        console.log(filt.innerHTML);
+        filt.innerHTML = filt.innerHTML.replace('<span class="txt">', '');
+        filt.innerHTML = filt.innerHTML.replace('<span class="fa-stack fa-1x"><i class="far fa-circle fa-stack-1x" aria-hidden="true"></i><span class="x fa-stack-1x">x</span></span>', '');
+        filt.innerHTML = filt.innerHTML.replace('<span class="fa-stack fa-1x"><i class="far fa-circle fa-stack-1x"></i><span class="x fa-stack-1x">x</span></span>', '');
         recipes = Filter.tags(filt, recipes)
     }
     input = document.getElementById("myInput");
@@ -204,8 +198,8 @@ function display(recipes) {
 
     //arranger les recettes dans leur ordre d'origine
     recipes.sort(function (a, b) {
-        let idA = new Date(a.id), idB = new Date(b.id)
-        return idA - idB
+        let idA = new Date(a.id), idB = new Date(b.id);
+        return idA - idB;
     });
     displayRecipes(recipes);
 }
@@ -257,13 +251,12 @@ async function init() {
             for (let i = 0; i < li.length; i++) {
                 
                 if (li[i].textContent.toLowerCase().includes(e.target.value.toLowerCase())) {
-                    li[i].style.display="list-item"
+                    li[i].style.display="list-item";
                 }
                 else {
-                    li[i].style.display="none"
+                    li[i].style.display="none";
                 }
             }
-            console.log(e.target.value);
             
         });
     }
