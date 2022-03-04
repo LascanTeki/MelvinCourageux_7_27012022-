@@ -192,26 +192,34 @@ li {
     font-weight: lighter;
 }
 
-.dropdown-parent #form, .open #menu1, .open #menu2, .open #menu3 {
+.dropdown-parent .form, .open #menu1, .open #menu2, .open #menu3 {
     display: none;
 }
 
-.open #form {
+.open .form {
     display: flex;
 }
 
-.open #form form {
+.open .form form {
     background-color: transparent;
     border: none;
 }
 
-.open #form form input::placeholder {
+.open .form form input::placeholder {
     color: white;
     opacity: 50%;
     font-weight: 400;
 }
 
-#form span {
+.dropdown-parent{
+    padding-left: 40px;
+}
+
+.dropdown-parent:first-of-type{
+    padding-left: 0;
+}
+
+.form span {
     font-size: 18px;
 }
 
