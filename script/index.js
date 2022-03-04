@@ -1,5 +1,9 @@
+//prendre les recettes
+
 let recipes = Getrecipes();
 
+
+//mettre les recettes en place dans la page
 async function displayRecipes(recipes) {
     const section = document.getElementById("recipes");
     const filter = document.getElementsByClassName("blue");
@@ -84,11 +88,16 @@ async function displayRecipes(recipes) {
     }
 }
 
+//faire apparaitre la liste des filtres
+
 function Tag(filter, content, color) {
+
+    //mettre une majuscule seulement sur la première lettre
     content = content.map(element => {
         return element.charAt(0).toUpperCase() + element.toLowerCase().slice(1);
     });
 
+    //retirer les doublons
     content = [...new Set(content)];
 
     for (i = 0; i < content.length; i++) {
@@ -102,8 +111,12 @@ function Tag(filter, content, color) {
     }
 }
 
-class Filter {
 
+//filtrage des recettes quand la bar de recherche est utilisée ou quand un filtre est ajouté 
+
+    
+class Filter {
+//bar de recherche
     static filter(filter, recipes) {
         console.log("still")
         let final = [];
