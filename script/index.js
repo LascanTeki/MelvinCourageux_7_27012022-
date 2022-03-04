@@ -180,8 +180,11 @@ function display(recipes) {
     for (let i = 0; i < filtering.length; i++) {
         let filt = filtering[i].cloneNode(true);
         //isoler le filtre
+        console.log(filt.innerHTML);
         filt.innerHTML = filt.innerHTML.replace('<span class="txt">', '')
+        filt.innerHTML = filt.innerHTML.replace('<span class="fa-stack fa-1x"><i class="far fa-circle fa-stack-1x" aria-hidden="true"></i><span class="x fa-stack-1x">x</span></span>', '')
         filt.innerHTML = filt.innerHTML.replace('<span class="fa-stack fa-1x"><i class="far fa-circle fa-stack-1x"></i><span class="x fa-stack-1x">x</span></span>', '')
+        console.log(filt.innerHTML);
         recipes = Filter.tags(filt, recipes)
     }
     input = document.getElementById("myInput");
