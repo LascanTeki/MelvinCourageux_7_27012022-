@@ -125,7 +125,7 @@ class Filter {
         });
         return final;
     }
-
+    //tags
     static tags(e, list) {
         console.log(e.textContent);
         if (e.className === "g" || e.className === "tags g") {
@@ -137,18 +137,18 @@ class Filter {
         if (e.className === "b" || e.className === "tags b") {
             let f;
             list = list.filter(x => x.ingredients.find(col => {
-
+                
                 return e.textContent.toLowerCase() === col.ingredient.toLowerCase();
-            }))
+              }))
         }
         if (e.className === "r" || e.className === "tags r") {
             let f;
 
             list = list.filter(x => x.ustensils.find(col => {
                 return e.textContent.toLowerCase() === col.toLowerCase();
-            }))
+              }))
 
-
+ 
         }
         console.log(list);
         return list;
@@ -156,34 +156,40 @@ class Filter {
 
 }
 
+
+//mettre les recettes dans la page après filtrage
+
 function display(recipes) {
     ul = document.getElementById("recipes");
     f1 = document.getElementsByClassName("blue");
     f2 = document.getElementsByClassName("green");
     f3 = document.getElementsByClassName("red");
     filtering = document.getElementsByClassName("tags");
+
+    //vider la liste des recettes et des tags
     ul.innerHTML = "";
     f1[1].innerHTML = "";
     f2[1].innerHTML = "";
     f3[1].innerHTML = "";
+
     for (let i = 0; i < filtering.length; i++) {
-
         let filt = filtering[i].cloneNode(true);
-
+        //isoler le filtre
+        console.log(filt.innerHTML);
         filt.innerHTML = filt.innerHTML.replace('<span class="txt">', '')
-        filt.innerHTML = filt.innerHTML.replace('<span class="fa-stack fa-1x">', '')
-        filt.innerHTML = filt.innerHTML.replace('</i><span class="x fa-stack-1x">', '')
-        filt.innerHTML = filt.innerHTML.replace('x</i>', '')
-        filt.innerHTML = filt.innerHTML.replace('<i class="far fa-circle fa-stack-1x"></i>', '')
-        console.log(filt);
+        filt.innerHTML = filt.innerHTML.replace('<span class="fa-stack fa-1x"><i class="far fa-circle fa-stack-1x" aria-hidden="true"></i><span class="x fa-stack-1x">x</span></span>', '')
+        filt.innerHTML = filt.innerHTML.replace('<span class="fa-stack fa-1x"><i class="far fa-circle fa-stack-1x"></i><span class="x fa-stack-1x">x</span></span>', '')
+        console.log(filt.innerHTML);
         recipes = Filter.tags(filt, recipes)
     }
     input = document.getElementById("myInput");
     filter = input.value.toUpperCase();
     if (filter.length >= 3) {
         recipes = Filter.filter(filter, recipes);
-        console.log(recipes);
+
     }
+
+    //arranger les recettes dans leur ordre d'origine
     recipes.sort(function (a, b) {
         let idA = new Date(a.id), idB = new Date(b.id)
         return idA - idB
@@ -191,12 +197,16 @@ function display(recipes) {
     displayRecipes(recipes);
 }
 
+
+//afficher les tags
 const tagging = function (e) {
     tags = document.getElementById("tags");
     const tag = document.createElement('a');
     tag.innerHTML = `<span class = "txt">${e.target.textContent}</span><span class="fa-stack fa-1x"><i class="far fa-circle fa-stack-1x"></i><span class="x fa-stack-1x">x</span></span>`;
     tag.setAttribute("class", `tags ${e.target.className}`);
     tags.appendChild(tag);
+
+    //enlever un tag quand cliqué
 
     tag.addEventListener('click', function (e) {
         tag.remove();
@@ -209,42 +219,43 @@ const tagging = function (e) {
 async function init() {
     await displayRecipes(recipes);
     input = document.getElementById("myInput");
-    search = document.getElementsByClassName("barre");
+    search =  document.getElementsByClassName("barre");
     filter = document.getElementsByClassName("dropdown-item");
 
     input.addEventListener('keyup', () => {
         display(recipes);
     });
 
+    //barre de recherche pour filtres
     for (let t = 0; t < 3; t++) {
         search[t].addEventListener('click', function (e) {
             e.stopPropagation();
         });
         search[t].addEventListener('keyup', function (e) {
-            if (e.target.id === "barrer") {
+            if (e.target.id==="barrer") {
                 li = document.getElementsByClassName("r");
             }
-            if (e.target.id === "barreb") {
+            if (e.target.id==="barreb") {
                 li = document.getElementsByClassName("b");
             }
-            if (e.target.id === "barreg") {
+            if (e.target.id==="barreg") {
                 li = document.getElementsByClassName("g");
             }
             for (let i = 0; i < li.length; i++) {
-
+                
                 if (li[i].textContent.toLowerCase().includes(e.target.value.toLowerCase())) {
-                    li[i].style.display = "list-item"
+                    li[i].style.display="list-item"
                 }
                 else {
-                    li[i].style.display = "none"
+                    li[i].style.display="none"
                 }
             }
             console.log(e.target.value);
-
+            
         });
     }
 
-
+    
 }
 
 init();
