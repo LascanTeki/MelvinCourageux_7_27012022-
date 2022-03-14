@@ -9,9 +9,17 @@ async function displayRecipes(recipes) {
     const filter = document.getElementsByClassName("blue");
     const filter2 = document.getElementsByClassName("green");
     const filter3 = document.getElementsByClassName("red");
+    const error = document.getElementById("error");
     let app = [];
     let us = [];
     let ingr = [];
+    
+    if (recipes.length === 0) {
+        error.style.display="block"
+    }
+    else{
+        error.style.display="none"
+    }
 
     recipes.forEach((recip) => {
         const { name, ingredients, time, description, appliance, ustensils } = recip;
@@ -70,6 +78,7 @@ async function displayRecipes(recipes) {
 
         app.push(appliance);
 
+        
         for (let o = 0; o < ustensils.length; o++) {
             us.push(ustensils[o]);
         }
@@ -172,7 +181,7 @@ function display(recipes) {
     filtering = document.getElementsByClassName("tags");
 
     //vider la liste des recettes et des tags
-    ul.innerHTML = "";
+    ul.innerHTML = '<div id="error">Aucune recette ne correspond à votre critère… vous pouvez chercher « tarte aux pommes », « poisson », etc.</div> ';
     f1[1].innerHTML = "";
     f2[1].innerHTML = "";
     f3[1].innerHTML = "";

@@ -272,3 +272,10 @@ a:hover {
     text-overflow: ellipsis;
     overflow: hidden;
 }
+
+#error{
+    margin-top: 100px;
+    display: none;
+    font-weight: bold;
+    font-size: large;
+}
